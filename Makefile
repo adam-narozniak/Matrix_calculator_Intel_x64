@@ -1,5 +1,5 @@
-CC = g++
-CFLAGS = -Wall -m64
+CC = gcc 
+CFLAGS = -Wall -m64 -g 
 
 all: main.o mc.o
 	$(CC) $(CFLAGS) main.o mc.o -o fun
@@ -8,14 +8,15 @@ all: main.o mc.o
 #	$(CC) $(CFLAGS) -o fun main.o mc.o
 
 main.o: main.c
-	$(CC) $(CFLAGS) -c main.c -o main.o 
+	$(CC) $(CFLAGS) -c main.c -o main.o
 
-mc.o: mc.s
-	nasm -f elf64 mc.s -o mc.o 
+mc.o: mc.asm
+	nasm -f elf64 mc.asm -o mc.o 
 
 clean:
 	rm -f *.o
 
 run: fun
 	./fun
+#gdb fun
 
